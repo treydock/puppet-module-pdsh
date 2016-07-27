@@ -29,7 +29,11 @@ class pdsh (
   anchor { 'pdsh::end': }
 
   if $groups {
-    ensure_resources('pdsh::group', $groups)
+    if is_array($groups) {
+      ensure_resource('pdsh::group', $groups)
+    } elsif is_hash($groups) {
+      create_resources('pdsh::group', $groups)
+    }
   }
 
 }

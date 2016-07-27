@@ -6,7 +6,6 @@ define pdsh::group::alias ($group) {
   file { "${pdsh::dsh_group_dir}/${name}":
     ensure  => 'link',
     target  => $group,
-    require => Pdsh::Group[$group],
   }
 
 }

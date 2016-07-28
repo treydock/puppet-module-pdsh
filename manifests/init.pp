@@ -10,12 +10,14 @@ class pdsh (
   $extra_packages         = [],
   $dsh_config_dir         = $pdsh::params::dsh_config_dir,
   $dsh_group_dir          = $pdsh::params::dsh_group_dir,
+  $dsh_group_dir_purge    = true,
   $groups                 = undef,
 ) inherits pdsh::params {
 
   validate_bool($with_rsh)
   validate_bool($with_ssh)
   validate_array($extra_packages)
+  validate_bool($dsh_group_dir_purge)
 
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure
@@ -29,7 +31,6 @@ class pdsh (
     $_ssh_package_ensure   = 'absent'
   }
 
-  
   include pdsh::install
   include pdsh::config
 

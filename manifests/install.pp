@@ -23,7 +23,7 @@ class pdsh::install {
     ensure => $pdsh::_ssh_package_ensure,
     name   => $pdsh::ssh_package_name,
   }
-  
+
   ensure_packages($pdsh::extra_packages, { 'ensure' => $pdsh::package_ensure })
 
 }

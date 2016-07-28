@@ -20,7 +20,7 @@ class pdsh::install {
   }
 
   package { 'pdsh-rcmd-ssh':
-    ensure => $pdsh::package_ensure,
+    ensure => $pdsh::_ssh_package_ensure,
     name   => $pdsh::ssh_package_name,
   }
   

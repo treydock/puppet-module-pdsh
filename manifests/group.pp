@@ -19,7 +19,7 @@ define pdsh::group (
     order   => '01',
   }
 
-  ensure_resources('pdsh::group::alias', $aliases, {'group' => $name})
-  ensure_resources('pdsh::group::members', $members, {'group' => $name})
+  ensure_resource('pdsh::group::alias', $aliases, {'group' => $name})
+  ensure_resource('pdsh::group::member', $members, {'group' => $name})
 
 }

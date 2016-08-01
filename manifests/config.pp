@@ -13,11 +13,13 @@ class pdsh::config {
   }
 
   file { '/etc/dsh/group':
-    ensure => 'directory',
-    path   => $pdsh::dsh_group_dir,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
+    ensure  => 'directory',
+    path    => $pdsh::dsh_group_dir,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    purge   => $pdsh::dsh_group_dir_purge,
+    recurse => $pdsh::dsh_group_dir_purge,
   }
 
 }

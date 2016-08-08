@@ -1,0 +1,10 @@
+fixtures:
+  repositories:
+    stdlib:
+      repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    concat:
+      repo: https://github.com/puppetlabs/puppetlabs-concat.git
+    epel:
+      repo: https://github.com/stahnma/puppet-module-epel.git
+  symlinks:
+    pdsh: "#{source_dir}"

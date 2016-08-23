@@ -1,0 +1,7 @@
+######### Managed by Puppet #########
+<% if @rcmd_type -%>
+export PDSH_RCMD_TYPE="<%= @rcmd_type %>"
+<% end -%>
+<% if @ssh_args_append -%>
+export PDSH_SSH_ARGS_APPEND="<%= @ssh_args_append %>"
+<% end -%>

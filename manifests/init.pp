@@ -14,11 +14,15 @@ class pdsh (
   $dsh_group_dir          = $pdsh::params::dsh_group_dir,
   $dsh_group_dir_purge    = true,
   $groups                 = undef,
+  $use_setuid             = false,
+  $rcmd_type              = undef,
+  $ssh_args_append        = undef,
 ) inherits pdsh::params {
 
   validate_bool($with_rsh)
   validate_bool($with_ssh)
   validate_bool($with_torque)
+  validate_bool($use_setuid)
   validate_array($extra_packages)
   validate_bool($dsh_group_dir_purge)
 

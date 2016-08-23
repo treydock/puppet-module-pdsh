@@ -45,6 +45,12 @@ class pdsh::install {
     require => $_package_require,
   }
 
+  package { 'pdsh-mod-torque':
+    ensure  => $pdsh::_torque_package_ensure,
+    name    => $pdsh::torque_package_name,
+    require => $_package_require,
+  }
+
   ensure_packages($pdsh::extra_packages, $_package_defaults)
 
 }

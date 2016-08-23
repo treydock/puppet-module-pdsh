@@ -7,6 +7,7 @@ class pdsh::params {
       $rsh_package_name       = 'pdsh-rcmd-rsh'
       $ssh_package_name       = 'pdsh-rcmd-ssh'
       $dshgroup_package_name  = 'pdsh-mod-dshgroup'
+      $torque_package_name    = 'pdsh-mod-torque'
       $dsh_config_dir         = '/etc/dsh'
       $dsh_group_dir          = '/etc/dsh/group'
     }

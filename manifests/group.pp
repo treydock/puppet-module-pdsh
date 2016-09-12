@@ -20,6 +20,14 @@ define pdsh::group (
   }
 
   ensure_resource('pdsh::group::alias', $aliases, {'group' => $name})
-  ensure_resource('pdsh::group::member', $members, {'group' => $name})
+  if is_array($members) {
+    each($members) |$member| {
+      ensure_resource('pdsh::group::member', "${name}-${member}", {'group' => $name, 'name' => $member})
+    }
+  } elsif is_string($members) {
+    ensure_resource('pdsh::group::member', "${name}-${members}", {'group' => $name, 'name' => $members})
+  } else {
+    fail('pdsh::group: unsupported type for members')
+  }
 
 }

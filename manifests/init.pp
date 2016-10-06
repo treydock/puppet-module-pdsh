@@ -1,6 +1,6 @@
 # See README.md for more details.
 class pdsh (
-  $with_rsh               = true,
+  $with_rsh               = false,
   $with_ssh               = true,
   $with_torque            = false,
   $package_ensure         = 'present',

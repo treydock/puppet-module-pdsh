@@ -22,10 +22,10 @@ define pdsh::group (
   ensure_resource('pdsh::group::alias', $aliases, {'group' => $name})
   if is_array($members) {
     each($members) |$member| {
-      ensure_resource('pdsh::group::member', "${name}-${member}", {'group' => $name, 'name' => $member})
+      ensure_resource('pdsh::group::member', "${name}-${member}", {'group' => $name, 'member' => $member})
     }
   } elsif is_string($members) {
-    ensure_resource('pdsh::group::member', "${name}-${members}", {'group' => $name, 'name' => $members})
+    ensure_resource('pdsh::group::member', "${name}-${members}", {'group' => $name, 'member' => $members})
   } else {
     fail('pdsh::group: unsupported type for members')
   }

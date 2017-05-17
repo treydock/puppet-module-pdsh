@@ -26,8 +26,8 @@ describe 'pdsh' do
       it { is_expected.to contain_class('pdsh::config').that_comes_before('Anchor[pdsh::end]') }
       it { is_expected.to contain_anchor('pdsh::end') }
 
-      include_context 'pdsh::install'
-      include_context 'pdsh::config'
+      include_context 'pdsh::install', facts
+      include_context 'pdsh::config', facts
 
       # Test validate_bool parameters
       [

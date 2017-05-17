@@ -1,4 +1,11 @@
-shared_context "pdsh::config" do
+shared_context "pdsh::config" do |facts|
+  case facts[:operatingsystemrelease]
+  when /^7/
+    binary_mode = '0755'
+  when /^6/
+    binary_mode = '4755'
+  end
+
   it do
     is_expected.to contain_file('/etc/dsh').with({
       :ensure  => 'directory',
@@ -24,7 +31,7 @@ shared_context "pdsh::config" do
       :ensure => 'present',
       :owner  => 'root',
       :group  => 'root',
-      :mode   => '0755',
+      :mode   => binary_mode,
     })
   end
 
@@ -33,7 +40,7 @@ shared_context "pdsh::config" do
       :ensure => 'present',
       :owner  => 'root',
       :group  => 'root',
-      :mode   => '0755',
+      :mode   => binary_mode,
     })
   end
 

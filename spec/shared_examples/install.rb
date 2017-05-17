@@ -1,4 +1,4 @@
-shared_context "pdsh::install" do
+shared_context "pdsh::install" do |facts|
   it do
     is_expected.to contain_package('pdsh').only_with({
       :ensure   => 'present',

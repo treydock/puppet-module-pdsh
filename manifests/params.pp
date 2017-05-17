@@ -10,13 +10,6 @@ class pdsh::params {
       $torque_package_name    = 'pdsh-mod-torque'
       $dsh_config_dir         = '/etc/dsh'
       $dsh_group_dir          = '/etc/dsh/group'
-
-      if versioncmp($::operatingsystemrelease, '7.0') >= 0 {
-        $use_setuid = false
-      } else {
-        $use_setuid = true
-      }
-
     }
 
     default: {

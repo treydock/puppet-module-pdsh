@@ -14,7 +14,7 @@ class pdsh (
   $dsh_group_dir          = $pdsh::params::dsh_group_dir,
   $dsh_group_dir_purge    = true,
   $groups                 = undef,
-  $use_setuid             = $pdsh::params::use_setuid,
+  $use_setuid             = false,
   $rcmd_type              = undef,
   $ssh_args_append        = undef,
 ) inherits pdsh::params {

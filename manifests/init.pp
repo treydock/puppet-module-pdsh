@@ -7,7 +7,6 @@ class pdsh (
   $package_name           = $pdsh::params::package_name,
   $rsh_package_name       = $pdsh::params::rsh_package_name,
   $ssh_package_name       = $pdsh::params::ssh_package_name,
-  $exec_package_name      = $pdsh::params::exec_package_name,
   $dshgroup_package_name  = $pdsh::params::dshgroup_package_name,
   $torque_package_name    = $pdsh::params::torque_package_name,
   $extra_packages         = [],

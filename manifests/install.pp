@@ -27,14 +27,6 @@ class pdsh::install {
     require => $_package_require,
   }
 
-  if $pdsh::exec_package_name {
-    package { 'pdsh-rcmd-exec':
-      ensure  => $pdsh::package_ensure,
-      name    => $pdsh::exec_package_name,
-      require => $_package_require,
-    }
-  }
-
   package { 'pdsh-rcmd-rsh':
     ensure  => $pdsh::_rsh_package_ensure,
     name    => $pdsh::rsh_package_name,

@@ -1,30 +1,23 @@
 # See README.md for more details.
 class pdsh (
-  $with_rsh               = false,
-  $with_ssh               = true,
-  $with_torque            = false,
-  $package_ensure         = 'present',
-  $package_name           = $pdsh::params::package_name,
-  $rsh_package_name       = $pdsh::params::rsh_package_name,
-  $ssh_package_name       = $pdsh::params::ssh_package_name,
-  $dshgroup_package_name  = $pdsh::params::dshgroup_package_name,
-  $torque_package_name    = $pdsh::params::torque_package_name,
-  $extra_packages         = [],
-  $dsh_config_dir         = $pdsh::params::dsh_config_dir,
-  $dsh_group_dir          = $pdsh::params::dsh_group_dir,
-  $dsh_group_dir_purge    = true,
-  $groups                 = undef,
-  $use_setuid             = false,
-  $rcmd_type              = undef,
-  $ssh_args_append        = undef,
+  Boolean $with_rsh               = false,
+  Boolean $with_ssh               = true,
+  Boolean $with_torque            = false,
+  $package_ensure                 = 'present',
+  $package_name                   = $pdsh::params::package_name,
+  $rsh_package_name               = $pdsh::params::rsh_package_name,
+  $ssh_package_name               = $pdsh::params::ssh_package_name,
+  $dshgroup_package_name          = $pdsh::params::dshgroup_package_name,
+  $torque_package_name            = $pdsh::params::torque_package_name,
+  Array $extra_packages           = [],
+  $dsh_config_dir                 = $pdsh::params::dsh_config_dir,
+  $dsh_group_dir                  = $pdsh::params::dsh_group_dir,
+  Boolean $dsh_group_dir_purge    = true,
+  $groups                         = undef,
+  Boolean $use_setuid             = false,
+  $rcmd_type                      = undef,
+  $ssh_args_append                = undef,
 ) inherits pdsh::params {
-
-  validate_bool($with_rsh)
-  validate_bool($with_ssh)
-  validate_bool($with_torque)
-  validate_bool($use_setuid)
-  validate_array($extra_packages)
-  validate_bool($dsh_group_dir_purge)
 
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure

@@ -3,6 +3,7 @@ class pdsh (
   Boolean $with_rsh               = false,
   Boolean $with_ssh               = true,
   Boolean $with_torque            = false,
+  Boolean $manage_epel            = true,
   $package_ensure                 = 'present',
   $package_name                   = $pdsh::params::package_name,
   $rsh_package_name               = $pdsh::params::rsh_package_name,

@@ -6,9 +6,13 @@ class pdsh::install {
 
   case $::osfamily {
     'RedHat': {
-      include ::epel
+      if $pdsh::manage_epel {
+        include ::epel
+        $_package_require = Yumrepo['epel']
+      } else {
+        $_package_require = undef
+      }
 
-      $_package_require  = Yumrepo['epel']
       $_package_defaults = {
         'ensure'  => $pdsh::package_ensure,
         'require' => $_package_require,

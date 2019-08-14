@@ -1,8 +1,7 @@
-# Private class.
+# @summary Install pdsh
+# @api private
 class pdsh::install {
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
+  assert_private()
 
   case $::osfamily {
     'RedHat': {
@@ -55,6 +54,9 @@ class pdsh::install {
     require => $_package_require,
   }
 
-  ensure_packages($pdsh::extra_packages, $_package_defaults)
-
+  $pdsh::extra_packages.each |$package| {
+    package { $package:
+      * => $_package_defaults
+    }
+  }
 }

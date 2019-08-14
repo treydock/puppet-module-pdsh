@@ -1,8 +1,7 @@
-# Private class.
+# @summary Manage pdsh config
+# @api private
 class pdsh::config {
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
+  assert_private()
 
   $rcmd_type = $pdsh::rcmd_type
   $ssh_args_append = $pdsh::ssh_args_append

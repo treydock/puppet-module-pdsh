@@ -45,20 +45,25 @@ class pdsh (
   Boolean $with_torque            = false,
   Boolean $manage_epel            = true,
   String $package_ensure          = 'present',
-  String $package_name            = $pdsh::params::package_name,
-  String $rsh_package_name        = $pdsh::params::rsh_package_name,
-  String $ssh_package_name        = $pdsh::params::ssh_package_name,
-  String $dshgroup_package_name   = $pdsh::params::dshgroup_package_name,
-  String $torque_package_name     = $pdsh::params::torque_package_name,
+  String $package_name            = 'pdsh',
+  String $rsh_package_name        = 'pdsh-rcmd-rsh',
+  String $ssh_package_name        = 'pdsh-rcmd-ssh',
+  String $dshgroup_package_name   = 'pdsh-mod-dshgroup',
+  String $torque_package_name     = 'pdsh-mod-torque',
   Array $extra_packages           = [],
-  Stdlib::Absolutepath $dsh_config_dir = $pdsh::params::dsh_config_dir,
-  Stdlib::Absolutepath $dsh_group_dir  = $pdsh::params::dsh_group_dir,
+  Stdlib::Absolutepath $dsh_config_dir = '/etc/dsh',
+  Stdlib::Absolutepath $dsh_group_dir  = '/etc/dsh/group',
   Boolean $dsh_group_dir_purge    = true,
   Variant[Array, Hash] $groups    = {},
   Boolean $use_setuid             = false,
   Optional[String] $rcmd_type     = undef,
   Optional[String] $ssh_args_append = undef,
-) inherits pdsh::params {
+) {
+
+  $osfamily = dig($facts, 'os', 'family')
+  if ! $osfamily in ['RedHat'] {
+    fail("Unsupported osfamily: ${osfamily}, module ${module_name} only supports RedHat")
+  }
 
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure

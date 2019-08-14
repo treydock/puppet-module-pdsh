@@ -8,33 +8,41 @@
   "project_page": "https://github.com/treydock/puppet-module-pdsh",
   "issues_url": "https://github.com/treydock/puppet-module-pdsh/issues",
   "dependencies": [
-      {
-        "name": "puppetlabs/stdlib",
-        "version_requirement": ">= 4.13.1 <6.0.0"
-      }
+    {
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.13.1 <6.0.0"
+    },
+    {
+      "name": "stahnma/epel",
+      "version_requirement": ">= 1.0.0 <2.0.0"
+    }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
+        "6",
         "7"
       ]
     },
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
+        "6",
         "7"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
+        "6",
         "7"
       ]
     },
     {
       "operatingsystem": "Scientific",
       "operatingsystemrelease": [
+        "6",
         "7"
       ]
     },
@@ -48,14 +56,6 @@
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
         "16.04"
-      ]
-    },
-    {
-      "operatingsystem": "windows",
-      "operatingsystemrelease": [
-        "2008 R2",
-        "2012 R2",
-        "10"
       ]
     }
   ],

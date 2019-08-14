@@ -12,9 +12,11 @@
 6. [TODO](#todo)
 7. [Additional Information](#additional-information)
 
-## Overview
+## Setup
 
+### Setup Requirements
 
+For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yum_core](https://forge.puppet.com/puppetlabs/yum_core).
 
 ## Usage
 

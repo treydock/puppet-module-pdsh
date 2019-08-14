@@ -21,6 +21,7 @@ class pdsh::install {
       $_package_defaults = {
         'ensure'  => $pdsh::package_ensure,
       }
+      $_package_require = undef
     }
   }
 
@@ -30,28 +31,36 @@ class pdsh::install {
     require => $_package_require,
   }
 
-  package { 'pdsh-rcmd-rsh':
-    ensure  => $pdsh::_rsh_package_ensure,
-    name    => $pdsh::rsh_package_name,
-    require => $_package_require,
+  if $pdsh::rsh_package_name {
+    package { 'pdsh-rcmd-rsh':
+      ensure  => $pdsh::_rsh_package_ensure,
+      name    => $pdsh::rsh_package_name,
+      require => $_package_require,
+    }
   }
 
-  package { 'pdsh-mod-dshgroup':
-    ensure  => $pdsh::package_ensure,
-    name    => $pdsh::dshgroup_package_name,
-    require => $_package_require,
+  if $pdsh::dshgroup_package_name {
+    package { 'pdsh-mod-dshgroup':
+      ensure  => $pdsh::package_ensure,
+      name    => $pdsh::dshgroup_package_name,
+      require => $_package_require,
+    }
   }
 
-  package { 'pdsh-rcmd-ssh':
-    ensure  => $pdsh::_ssh_package_ensure,
-    name    => $pdsh::ssh_package_name,
-    require => $_package_require,
+  if $pdsh::ssh_package_name {
+    package { 'pdsh-rcmd-ssh':
+      ensure  => $pdsh::_ssh_package_ensure,
+      name    => $pdsh::ssh_package_name,
+      require => $_package_require,
+    }
   }
 
-  package { 'pdsh-mod-torque':
-    ensure  => $pdsh::_torque_package_ensure,
-    name    => $pdsh::torque_package_name,
-    require => $_package_require,
+  if $pdsh::torque_package_name {
+    package { 'pdsh-mod-torque':
+      ensure  => $pdsh::_torque_package_ensure,
+      name    => $pdsh::torque_package_name,
+      require => $_package_require,
+    }
   }
 
   $pdsh::extra_packages.each |$package| {

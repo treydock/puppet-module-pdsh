@@ -18,22 +18,24 @@ class pdsh::config {
     $_env_ensure = 'absent'
   }
 
-  file { '/etc/dsh':
-    ensure => 'directory',
-    path   => $pdsh::dsh_config_dir,
-    owner  => 'root',
-    group  => 'root',
-    mode   => '0755',
-  }
+  if $pdsh::support_dsh {
+    file { '/etc/dsh':
+      ensure => 'directory',
+      path   => $pdsh::dsh_config_dir,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0755',
+    }
 
-  file { '/etc/dsh/group':
-    ensure  => 'directory',
-    path    => $pdsh::dsh_group_dir,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0755',
-    purge   => $pdsh::dsh_group_dir_purge,
-    recurse => $pdsh::dsh_group_dir_purge,
+    file { '/etc/dsh/group':
+      ensure  => 'directory',
+      path    => $pdsh::dsh_group_dir,
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0755',
+      purge   => $pdsh::dsh_group_dir_purge,
+      recurse => $pdsh::dsh_group_dir_purge,
+    }
   }
 
   file { '/usr/bin/pdsh':

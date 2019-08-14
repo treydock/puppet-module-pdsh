@@ -9,6 +9,8 @@
 #   Install ssh support
 # @param with_torque
 #   Install Torque support
+# @param support_dsh
+#   Boolean to set if dsh support is available
 # @param manage_epel
 #   Boolean that determines if EPEL repo should be managed
 # @param package_ensure 
@@ -43,13 +45,14 @@ class pdsh (
   Boolean $with_rsh               = false,
   Boolean $with_ssh               = true,
   Boolean $with_torque            = false,
+  Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
   String $package_ensure          = 'present',
   String $package_name            = 'pdsh',
-  String $rsh_package_name        = 'pdsh-rcmd-rsh',
-  String $ssh_package_name        = 'pdsh-rcmd-ssh',
-  String $dshgroup_package_name   = 'pdsh-mod-dshgroup',
-  String $torque_package_name     = 'pdsh-mod-torque',
+  Optional[String] $rsh_package_name      = undef,
+  Optional[String] $ssh_package_name      = undef,
+  Optional[String] $dshgroup_package_name = undef,
+  Optional[String] $torque_package_name   = undef,
   Array $extra_packages           = [],
   Stdlib::Absolutepath $dsh_config_dir = '/etc/dsh',
   Stdlib::Absolutepath $dsh_group_dir  = '/etc/dsh/group',
@@ -61,8 +64,8 @@ class pdsh (
 ) {
 
   $osfamily = dig($facts, 'os', 'family')
-  if ! $osfamily in ['RedHat'] {
-    fail("Unsupported osfamily: ${osfamily}, module ${module_name} only supports RedHat")
+  if ! ($osfamily in ['RedHat','Debian']) {
+    fail("Unsupported osfamily: ${osfamily}, module ${module_name} only supports RedHat and Debian")
   }
 
   if $with_rsh {

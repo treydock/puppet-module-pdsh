@@ -15,18 +15,20 @@ describe 'pdsh class:' do
       it { is_expected.to be_installed }
     end
 
-    describe file('/etc/dsh') do
-      it { is_expected.to be_directory }
-      it { is_expected.to be_mode 755 }
-      it { is_expected.to be_owned_by 'root' }
-      it { is_expected.to be_grouped_into 'root' }
-    end
+    if fact('os.family') == 'RedHat'
+      describe file('/etc/dsh') do
+        it { is_expected.to be_directory }
+        it { is_expected.to be_mode 755 }
+        it { is_expected.to be_owned_by 'root' }
+        it { is_expected.to be_grouped_into 'root' }
+      end
 
-    describe file('/etc/dsh/group') do
-      it { is_expected.to be_directory }
-      it { is_expected.to be_mode 755 }
-      it { is_expected.to be_owned_by 'root' }
-      it { is_expected.to be_grouped_into 'root' }
+      describe file('/etc/dsh/group') do
+        it { is_expected.to be_directory }
+        it { is_expected.to be_mode 755 }
+        it { is_expected.to be_owned_by 'root' }
+        it { is_expected.to be_grouped_into 'root' }
+      end
     end
   end
 end

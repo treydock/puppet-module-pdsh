@@ -1,4 +1,15 @@
+# @summary Define pdsh groups
 #
+# @example
+#   pdsh::group { 'nodes':
+#     members => 'c[01-04]',
+#     aliases => 'compute',
+#   }
+#
+# @param aliases
+#   Group aliases
+# @param members
+#   Group members
 define pdsh::group (
   $aliases = [],
   $members = [],

@@ -3,14 +3,69 @@
   "version": "0.0.1",
   "author": "treydock",
   "summary": "pdsh Puppet module",
-  "license": "Apache 2.0",
-  "source": "git://github.com/treydock/puppet-module-pdsh.git",
-  "issues_url": "https://github.com/treydock/puppet-module-pdsh/issues",
+  "license": "Apache-2.0",
+  "source": "https://github.com/treydock/puppet-module-pdsh",
   "project_page": "https://github.com/treydock/puppet-module-pdsh",
+  "issues_url": "https://github.com/treydock/puppet-module-pdsh/issues",
   "dependencies": [
     {
-      "name": "puppetlabs-stdlib", "version_range": ">= 3.2.0 <5.0.0",
-      "name": "puppetlabs-concat", "version_range": ">= 1.0.0 <3.0.0"
+      "name": "puppetlabs/stdlib",
+      "version_requirement": ">= 4.13.1 <6.0.0"
+    },
+    {
+      "name": "stahnma/epel",
+      "version_requirement": ">= 1.0.0 <2.0.0"
     }
-  ]
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "8"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "16.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.10.0",
+  "template-url": "https://github.com/treydock/pdk-templates.git#master",
+  "template-ref": "heads/master-0-g68ecb62"
 }

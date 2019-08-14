@@ -1,4 +1,7 @@
+# @summary Manage pdsh group alias
 #
+# @param group
+#   The pdsh group to assign to this alias
 define pdsh::group::alias ($group) {
 
   include pdsh

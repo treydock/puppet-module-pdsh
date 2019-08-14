@@ -41,10 +41,10 @@ class pdsh (
   include pdsh::install
   include pdsh::config
 
-  anchor { 'pdsh::start': }->
-  Class['pdsh::install']->
-  Class['pdsh::config']->
-  anchor { 'pdsh::end': }
+  anchor { 'pdsh::start': }
+  ->Class['pdsh::install']
+  ->Class['pdsh::config']
+  ->anchor { 'pdsh::end': }
 
   if $groups {
     if is_array($groups) {

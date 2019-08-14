@@ -3,15 +3,15 @@
   "version": "0.0.1",
   "author": "treydock",
   "summary": "pdsh Puppet module",
-  "license": "Apache 2.0",
-  "source": "git://github.com/treydock/puppet-module-pdsh.git",
+  "license": "Apache-2.0",
+  "source": "https://github.com/treydock/puppet-module-pdsh",
   "project_page": "https://github.com/treydock/puppet-module-pdsh",
   "issues_url": "https://github.com/treydock/puppet-module-pdsh/issues",
   "dependencies": [
-    {
-      "name": "puppetlabs-concat",
-      "version_range": ">= 1.0.0 <3.0.0"
-    }
+      {
+        "name": "puppetlabs/stdlib",
+        "version_requirement": ">= 4.13.1 <6.0.0"
+      }
   ],
   "operatingsystem_support": [
     {

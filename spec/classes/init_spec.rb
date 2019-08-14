@@ -17,10 +17,8 @@ describe 'pdsh' do
       it { is_expected.to create_class('pdsh') }
       it { is_expected.to contain_class('pdsh::params') }
 
-      it { is_expected.to contain_anchor('pdsh::start').that_comes_before('Class[pdsh::install]') }
       it { is_expected.to contain_class('pdsh::install').that_comes_before('Class[pdsh::config]') }
-      it { is_expected.to contain_class('pdsh::config').that_comes_before('Anchor[pdsh::end]') }
-      it { is_expected.to contain_anchor('pdsh::end') }
+      it { is_expected.to contain_class('pdsh::config') }
 
       include_context 'pdsh::install'
       include_context 'pdsh::config'

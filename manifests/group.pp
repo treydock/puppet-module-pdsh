@@ -11,8 +11,8 @@
 # @param members
 #   Group members
 define pdsh::group (
-  $aliases = [],
-  $members = [],
+  Array $aliases = [],
+  Array $members = [],
 ) {
 
   include pdsh
@@ -30,15 +30,19 @@ define pdsh::group (
     order   => '01',
   }
 
-  ensure_resource('pdsh::group::alias', $aliases, {'group' => $name})
-  if is_array($members) {
-    each($members) |$member| {
-      ensure_resource('pdsh::group::member', "${name}-${member}", {'group' => $name, 'member' => $member})
+  $aliases.each |$alias| {
+    file { "${pdsh::dsh_group_dir}/${alias}":
+      ensure => 'link',
+      target => $name,
     }
-  } elsif is_string($members) {
-    ensure_resource('pdsh::group::member', "${name}-${members}", {'group' => $name, 'member' => $members})
-  } else {
-    fail('pdsh::group: unsupported type for members')
+  }
+
+  $members.each |$member| {
+    concat::fragment { "pdsh-${name}-member-${member}":
+      target  => "${pdsh::dsh_group_dir}/${name}",
+      content => "${member}\n",
+      order   => '10',
+    }
   }
 
 }

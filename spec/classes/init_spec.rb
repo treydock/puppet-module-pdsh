@@ -1,12 +1,7 @@
 require 'spec_helper'
 
 describe 'pdsh' do
-  on_supported_os(supported_os: [
-                    {
-                      'operatingsystem' => 'RedHat',
-                      'operatingsystemrelease' => ['6', '7'],
-                    },
-                  ]).each do |os, facts|
+  on_supported_os.each do |os, facts|
     context "on #{os}" do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
@@ -19,8 +14,8 @@ describe 'pdsh' do
       it { is_expected.to contain_class('pdsh::install').that_comes_before('Class[pdsh::config]') }
       it { is_expected.to contain_class('pdsh::config') }
 
-      include_context 'pdsh::install'
-      include_context 'pdsh::config'
+      include_context 'pdsh::install', facts
+      include_context 'pdsh::config', facts
 
       # Test validate_bool parameters
       [

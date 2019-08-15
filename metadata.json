@@ -1,6 +1,6 @@
 {
   "name": "treydock-pdsh",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "treydock",
   "summary": "pdsh Puppet module",
   "license": "Apache-2.0",

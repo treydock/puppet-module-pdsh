@@ -11,9 +11,20 @@
 # @param members
 #   Group members
 define pdsh::group (
-  Array $aliases = [],
-  Array $members = [],
+  Variant[Array, String] $aliases = [],
+  Variant[Array, String] $members = [],
 ) {
+
+  if $aliases =~ String {
+    $_aliases = [$aliases]
+  } else {
+    $_aliases = $aliases
+  }
+  if $members =~ String {
+    $_members = [$members]
+  } else {
+    $_members = $members
+  }
 
   include pdsh
 
@@ -30,14 +41,14 @@ define pdsh::group (
     order   => '01',
   }
 
-  $aliases.each |$alias| {
+  $_aliases.each |$alias| {
     file { "${pdsh::dsh_group_dir}/${alias}":
       ensure => 'link',
       target => $name,
     }
   }
 
-  $members.each |$member| {
+  $_members.each |$member| {
     concat::fragment { "pdsh-${name}-member-${member}":
       target  => "${pdsh::dsh_group_dir}/${name}",
       content => "${member}\n",

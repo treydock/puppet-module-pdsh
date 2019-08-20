@@ -60,6 +60,14 @@ Install Torque support
 
 Default value: `false`
 
+##### `with_genders`
+
+Data type: `Boolean`
+
+Install genders support
+
+Default value: `false`
+
 ##### `support_dsh`
 
 Data type: `Boolean`
@@ -73,6 +81,14 @@ Default value: `true`
 Data type: `Boolean`
 
 Boolean that determines if EPEL repo should be managed
+
+Default value: `true`
+
+##### `manage_genders`
+
+Data type: `Boolean`
+
+Boolean that determines if genders class should be managed
 
 Default value: `true`
 
@@ -121,6 +137,14 @@ Default value: `undef`
 Data type: `Optional[String]`
 
 Torque support package name
+
+Default value: `undef`
+
+##### `genders_package_name`
+
+Data type: `Optional[String]`
+
+Genders support package name
 
 Default value: `undef`
 

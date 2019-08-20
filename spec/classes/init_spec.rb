@@ -17,16 +17,12 @@ describe 'pdsh' do
       include_context 'pdsh::install', facts
       include_context 'pdsh::config', facts
 
-      # Test validate_bool parameters
-      [
-      ].each do |param|
-        context "with #{param} => 'foo'" do
-          let(:params) { { param.to_sym => 'foo' } }
+      it { is_expected.not_to contain_class('genders') }
 
-          it 'raises an error' do
-            expect { is_expected.to compile }.to raise_error(%r{is not a boolean})
-          end
-        end
+      context 'with genders support' do
+        let(:params) { { with_genders: true, manage_genders: true } }
+
+        it { is_expected.to contain_class('genders').that_comes_before('Class[pdsh::install]') }
       end
     end # end context
   end # end on_supported_os loop

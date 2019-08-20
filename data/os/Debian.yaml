@@ -1,1 +1,3 @@
+pdsh::with_genders: true
 pdsh::support_dsh: false
+pdsh::manage_genders: false

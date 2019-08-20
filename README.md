@@ -21,7 +21,7 @@ The pdsh module will install and configure pdsh and optionally add groups.
 
 ### Setup Requirements
 
-For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yum_core](https://forge.puppet.com/puppetlabs/yum_core).
+For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yumrepo_core](https://forge.puppet.com/puppetlabs/yumrepo_core).
 
 ## Usage
 

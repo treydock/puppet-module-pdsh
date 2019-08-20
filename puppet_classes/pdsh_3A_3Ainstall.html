@@ -160,7 +160,15 @@
 68
 69
 70
-71</pre>
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install.pp', line 3</span>
@@ -224,6 +232,14 @@ class pdsh::install {
     package { &#39;pdsh-mod-torque&#39;:
       ensure  =&gt; $pdsh::_torque_package_ensure,
       name    =&gt; $pdsh::torque_package_name,
+      require =&gt; $_package_require,
+    }
+  }
+
+  if $pdsh::genders_package_name {
+    package { &#39;pdsh-mod-genders&#39;:
+      ensure  =&gt; $pdsh::_genders_package_ensure,
+      name    =&gt; $pdsh::genders_package_name,
       require =&gt; $_package_require,
     }
   }

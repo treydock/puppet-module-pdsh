@@ -23,6 +23,8 @@ The pdsh module will install and configure pdsh and optionally add groups.
 
 For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yumrepo_core](https://forge.puppet.com/puppetlabs/yumrepo_core).
 
+If genders support is enabled there is a soft dependency on [treydock/genders](https://forge.puppet.com/treydock/genders)
+
 ## Usage
 
 Install and configure pdsh

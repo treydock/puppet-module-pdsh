@@ -9,10 +9,14 @@
 #   Install ssh support
 # @param with_torque
 #   Install Torque support
+# @param with_genders
+#   Install genders support
 # @param support_dsh
 #   Boolean to set if dsh support is available
 # @param manage_epel
 #   Boolean that determines if EPEL repo should be managed
+# @param manage_genders
+#   Boolean that determines if genders class should be managed
 # @param package_ensure 
 #   Packages ensure property
 # @param package_name
@@ -25,6 +29,8 @@
 #   dshgroup support package name
 # @param torque_package_name
 #   Torque support package name
+# @param genders_package_name
+#   Genders support package name
 # @param extra_packages
 #   Additional pdsh packages to install
 # @param dsh_config_dir
@@ -45,14 +51,17 @@ class pdsh (
   Boolean $with_rsh               = false,
   Boolean $with_ssh               = true,
   Boolean $with_torque            = false,
+  Boolean $with_genders           = false,
   Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
+  Boolean $manage_genders         = true,
   String $package_ensure          = 'present',
   String $package_name            = 'pdsh',
   Optional[String] $rsh_package_name      = undef,
   Optional[String] $ssh_package_name      = undef,
   Optional[String] $dshgroup_package_name = undef,
   Optional[String] $torque_package_name   = undef,
+  Optional[String] $genders_package_name  = undef,
   Array $extra_packages           = [],
   Stdlib::Absolutepath $dsh_config_dir = '/etc/dsh',
   Stdlib::Absolutepath $dsh_group_dir  = '/etc/dsh/group',
@@ -84,6 +93,17 @@ class pdsh (
     $_torque_package_ensure = $package_ensure
   } else {
     $_torque_package_ensure = 'absent'
+  }
+
+  if $with_genders {
+    $_genders_package_ensure = $package_ensure
+  } else {
+    $_genders_package_ensure = 'absent'
+  }
+
+  if $with_genders and $manage_genders {
+    include ::genders
+    Class['genders'] -> Class['pdsh::install']
   }
 
   contain pdsh::install

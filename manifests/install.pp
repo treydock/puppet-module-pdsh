@@ -63,6 +63,14 @@ class pdsh::install {
     }
   }
 
+  if $pdsh::genders_package_name {
+    package { 'pdsh-mod-genders':
+      ensure  => $pdsh::_genders_package_ensure,
+      name    => $pdsh::genders_package_name,
+      require => $_package_require,
+    }
+  }
+
   $pdsh::extra_packages.each |$package| {
     package { $package:
       * => $_package_defaults

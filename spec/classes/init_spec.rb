@@ -24,6 +24,12 @@ describe 'pdsh' do
 
         it { is_expected.to contain_class('genders').that_comes_before('Class[pdsh::install]') }
       end
+
+      context 'when manage_epel is true', if: facts[:os]['family'] == 'RedHat' do
+        let(:params) { { manage_epel: true } }
+
+        it { is_expected.to contain_yumrepo('epel').that_comes_before('Class[pdsh::install]') }
+      end
     end # end context
   end # end on_supported_os loop
 end # end describe

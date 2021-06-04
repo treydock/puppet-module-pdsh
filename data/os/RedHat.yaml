@@ -1,5 +1,5 @@
 pdsh::rsh_package_name: pdsh-rcmd-rsh
 pdsh::ssh_package_name: pdsh-rcmd-ssh
 pdsh::dshgroup_package_name: pdsh-mod-dshgroup
-pdsh::torque_package_name: pdsh-mod-torque
 pdsh::genders_package_name: pdsh-mod-genders
+pdsh::slurm_package_name: pdsh-mod-slurm

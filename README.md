@@ -1,7 +1,7 @@
 # puppet-module-pdsh
 
 [![Puppet Forge](http://img.shields.io/puppetforge/v/treydock/pdsh.svg)](https://forge.puppetlabs.com/treydock/pdsh)
-[![Build Status](https://travis-ci.org/treydock/puppet-module-pdsh.png)](https://travis-ci.org/treydock/puppet-module-pdsh)
+[![CI Status](https://github.com/treydock/puppet-module-pdsh/workflows/CI/badge.svg?branch=master)](https://github.com/treydock/puppet-module-pdsh/actions?query=workflow%3ACI)
 
 ####Table of Contents
 
@@ -21,8 +21,6 @@ The pdsh module will install and configure pdsh and optionally add groups.
 
 ### Setup Requirements
 
-For systems with `yum` package manager using Puppet >= 6.0 there is a dependency on [puppetlabs/yumrepo_core](https://forge.puppet.com/puppetlabs/yumrepo_core).
-
 If genders support is enabled there is a soft dependency on [treydock/genders](https://forge.puppet.com/treydock/genders)
 
 ## Usage
@@ -30,7 +28,7 @@ If genders support is enabled there is a soft dependency on [treydock/genders](h
 Install and configure pdsh
 
 ```puppet
-include ::pdsh
+include pdsh
 ```
 
 **Note** Groups are only supported on Red Hat based systems.

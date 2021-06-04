@@ -28,6 +28,10 @@ define pdsh::group (
 
   include pdsh
 
+  if ! $pdsh::support_dsh {
+    fail('Defined type pdsh::group: Must set pdsh::support_dsh to true to use this feature')
+  }
+
   concat { "${pdsh::dsh_group_dir}/${name}":
     owner   => 'root',
     group   => 'root',

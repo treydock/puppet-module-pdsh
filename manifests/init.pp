@@ -7,10 +7,10 @@
 #   Install rsh support
 # @param with_ssh
 #   Install ssh support
-# @param with_torque
-#   Install Torque support
 # @param with_genders
 #   Install genders support
+# @param with_slurm
+#   Install SLURM support
 # @param support_dsh
 #   Boolean to set if dsh support is available
 # @param manage_epel
@@ -27,10 +27,10 @@
 #   ssh support package name
 # @param dshgroup_package_name
 #   dshgroup support package name
-# @param torque_package_name
-#   Torque support package name
 # @param genders_package_name
 #   Genders support package name
+# @param slurm_package_name
+#   SLURM support package name
 # @param extra_packages
 #   Additional pdsh packages to install
 # @param dsh_config_dir
@@ -50,8 +50,8 @@
 class pdsh (
   Boolean $with_rsh               = false,
   Boolean $with_ssh               = true,
-  Boolean $with_torque            = false,
   Boolean $with_genders           = false,
+  Boolean $with_slurm             = false,
   Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
   Boolean $manage_genders         = true,
@@ -60,8 +60,8 @@ class pdsh (
   Optional[String] $rsh_package_name      = undef,
   Optional[String] $ssh_package_name      = undef,
   Optional[String] $dshgroup_package_name = undef,
-  Optional[String] $torque_package_name   = undef,
   Optional[String] $genders_package_name  = undef,
+  Optional[String] $slurm_package_name    = undef,
   Array $extra_packages           = [],
   Stdlib::Absolutepath $dsh_config_dir = '/etc/dsh',
   Stdlib::Absolutepath $dsh_group_dir  = '/etc/dsh/group',
@@ -71,11 +71,6 @@ class pdsh (
   Optional[String] $rcmd_type     = undef,
   Optional[String] $ssh_args_append = undef,
 ) {
-
-  $osfamily = dig($facts, 'os', 'family')
-  if ! ($osfamily in ['RedHat','Debian']) {
-    fail("Unsupported osfamily: ${osfamily}, module ${module_name} only supports RedHat and Debian")
-  }
 
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure
@@ -89,21 +84,26 @@ class pdsh (
     $_ssh_package_ensure   = 'absent'
   }
 
-  if $with_torque {
-    $_torque_package_ensure = $package_ensure
-  } else {
-    $_torque_package_ensure = 'absent'
-  }
-
   if $with_genders {
     $_genders_package_ensure = $package_ensure
   } else {
     $_genders_package_ensure = 'absent'
   }
 
+  if $with_slurm {
+    $_slurm_package_ensure = $package_ensure
+  } else {
+    $_slurm_package_ensure = 'absent'
+  }
+
   if $with_genders and $manage_genders {
-    include ::genders
+    include genders
     Class['genders'] -> Class['pdsh::install']
+  }
+
+  if $manage_epel {
+    include epel
+    Yumrepo['epel'] -> Class['pdsh::install']
   }
 
   contain pdsh::install

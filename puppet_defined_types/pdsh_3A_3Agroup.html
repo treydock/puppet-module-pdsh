@@ -6,15 +6,15 @@
 <title>
   Defined Type: pdsh::group
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_defined_types::pdsh::group";
   relpath = '../';
 </script>
@@ -134,6 +134,7 @@
 </ul>
 
 
+
 </div><div class="method_details_list">
   <table class="source_code">
     <tr>
@@ -187,7 +188,11 @@
 56
 57
 58
-59</pre>
+59
+60
+61
+62
+63</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/group.pp', line 13</span>
@@ -209,6 +214,10 @@ define pdsh::group (
   }
 
   include pdsh
+
+  if ! $pdsh::support_dsh {
+    fail(&#39;Defined type pdsh::group: Must set pdsh::support_dsh to true to use this feature&#39;)
+  }
 
   concat { &quot;${pdsh::dsh_group_dir}/${name}&quot;:
     owner   =&gt; &#39;root&#39;,

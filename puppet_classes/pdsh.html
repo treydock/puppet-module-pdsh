@@ -6,15 +6,15 @@
 <title>
   Puppet Class: pdsh
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::pdsh";
   relpath = '../';
 </script>
@@ -132,24 +132,6 @@
   
     <li>
       
-        <span class='name'>with_torque</span>
-      
-      
-        <span class='type'>(<tt>Boolean</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>false</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Install Torque support</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>with_genders</span>
       
       
@@ -162,6 +144,24 @@
         &mdash;
         <div class='inline'>
 <p>Install genders support</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>with_slurm</span>
+      
+      
+        <span class='type'>(<tt>Boolean</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>false</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>Install SLURM support</p>
 </div>
       
     </li>
@@ -312,24 +312,6 @@
   
     <li>
       
-        <span class='name'>torque_package_name</span>
-      
-      
-        <span class='type'>(<tt>Optional[String]</tt>)</span>
-      
-      
-        <em class="default">(defaults to: <tt>undef</tt>)</em>
-      
-      
-        &mdash;
-        <div class='inline'>
-<p>Torque support package name</p>
-</div>
-      
-    </li>
-  
-    <li>
-      
         <span class='name'>genders_package_name</span>
       
       
@@ -342,6 +324,24 @@
         &mdash;
         <div class='inline'>
 <p>Genders support package name</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>slurm_package_name</span>
+      
+      
+        <span class='type'>(<tt>Optional[String]</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>undef</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'>
+<p>SLURM support package name</p>
 </div>
       
     </li>
@@ -495,6 +495,7 @@ environment variable</p>
 </ul>
 
 
+
 </div><div class="method_details_list">
   <table class="source_code">
     <tr>
@@ -590,8 +591,8 @@ environment variable</p>
 class pdsh (
   Boolean $with_rsh               = false,
   Boolean $with_ssh               = true,
-  Boolean $with_torque            = false,
   Boolean $with_genders           = false,
+  Boolean $with_slurm             = false,
   Boolean $support_dsh            = true,
   Boolean $manage_epel            = true,
   Boolean $manage_genders         = true,
@@ -600,8 +601,8 @@ class pdsh (
   Optional[String] $rsh_package_name      = undef,
   Optional[String] $ssh_package_name      = undef,
   Optional[String] $dshgroup_package_name = undef,
-  Optional[String] $torque_package_name   = undef,
   Optional[String] $genders_package_name  = undef,
+  Optional[String] $slurm_package_name    = undef,
   Array $extra_packages           = [],
   Stdlib::Absolutepath $dsh_config_dir = &#39;/etc/dsh&#39;,
   Stdlib::Absolutepath $dsh_group_dir  = &#39;/etc/dsh/group&#39;,
@@ -611,11 +612,6 @@ class pdsh (
   Optional[String] $rcmd_type     = undef,
   Optional[String] $ssh_args_append = undef,
 ) {
-
-  $osfamily = dig($facts, &#39;os&#39;, &#39;family&#39;)
-  if ! ($osfamily in [&#39;RedHat&#39;,&#39;Debian&#39;]) {
-    fail(&quot;Unsupported osfamily: ${osfamily}, module ${module_name} only supports RedHat and Debian&quot;)
-  }
 
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure
@@ -629,21 +625,26 @@ class pdsh (
     $_ssh_package_ensure   = &#39;absent&#39;
   }
 
-  if $with_torque {
-    $_torque_package_ensure = $package_ensure
-  } else {
-    $_torque_package_ensure = &#39;absent&#39;
-  }
-
   if $with_genders {
     $_genders_package_ensure = $package_ensure
   } else {
     $_genders_package_ensure = &#39;absent&#39;
   }
 
+  if $with_slurm {
+    $_slurm_package_ensure = $package_ensure
+  } else {
+    $_slurm_package_ensure = &#39;absent&#39;
+  }
+
   if $with_genders and $manage_genders {
-    include ::genders
+    include genders
     Class[&#39;genders&#39;] -&gt; Class[&#39;pdsh::install&#39;]
+  }
+
+  if $manage_epel {
+    include epel
+    Yumrepo[&#39;epel&#39;] -&gt; Class[&#39;pdsh::install&#39;]
   }
 
   contain pdsh::install

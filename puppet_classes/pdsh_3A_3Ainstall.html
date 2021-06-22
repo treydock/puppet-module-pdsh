@@ -6,15 +6,15 @@
 <title>
   Puppet Class: pdsh::install
   
-    &mdash; Documentation by YARD 0.9.20
+    &mdash; Documentation by YARD 0.9.26
   
 </title>
 
-  <link rel="stylesheet" href="../css/style.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/style.css" type="text/css" />
 
-  <link rel="stylesheet" href="../css/common.css" type="text/css" charset="utf-8" />
+  <link rel="stylesheet" href="../css/common.css" type="text/css" />
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
   pathId = "puppet_classes::pdsh::install";
   relpath = '../';
 </script>
@@ -85,6 +85,7 @@
 <div class="tags">
   
 
+
 </div><div class="method_details_list">
   <table class="source_code">
     <tr>
@@ -145,30 +146,7 @@
 53
 54
 55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79</pre>
+56</pre>
       </td>
       <td>
         <pre class="code"><span class="info file"># File 'manifests/install.pp', line 3</span>
@@ -176,39 +154,24 @@
 class pdsh::install {
   assert_private()
 
-  case $::osfamily {
-    &#39;RedHat&#39;: {
-      if $pdsh::manage_epel {
-        include ::epel
-        $_package_require = Yumrepo[&#39;epel&#39;]
-      } else {
-        $_package_require = undef
-      }
-
-      $_package_defaults = {
-        &#39;ensure&#39;  =&gt; $pdsh::package_ensure,
-        &#39;require&#39; =&gt; $_package_require,
-      }
-    }
-    default: {
-      $_package_defaults = {
-        &#39;ensure&#39;  =&gt; $pdsh::package_ensure,
-      }
-      $_package_require = undef
-    }
+  package { &#39;pdsh&#39;:
+    ensure =&gt; $pdsh::package_ensure,
+    name   =&gt; $pdsh::package_name,
   }
 
-  package { &#39;pdsh&#39;:
-    ensure  =&gt; $pdsh::package_ensure,
-    name    =&gt; $pdsh::package_name,
-    require =&gt; $_package_require,
+  if $pdsh::ssh_package_name {
+    package { &#39;pdsh-rcmd-ssh&#39;:
+      ensure =&gt; $pdsh::_ssh_package_ensure,
+      name   =&gt; $pdsh::ssh_package_name,
+      before =&gt; Package[&#39;pdsh&#39;],
+    }
   }
 
   if $pdsh::rsh_package_name {
     package { &#39;pdsh-rcmd-rsh&#39;:
-      ensure  =&gt; $pdsh::_rsh_package_ensure,
-      name    =&gt; $pdsh::rsh_package_name,
-      require =&gt; $_package_require,
+      ensure =&gt; $pdsh::_rsh_package_ensure,
+      name   =&gt; $pdsh::rsh_package_name,
+      before =&gt; Package[&#39;pdsh&#39;],
     }
   }
 
@@ -216,23 +179,7 @@ class pdsh::install {
     package { &#39;pdsh-mod-dshgroup&#39;:
       ensure  =&gt; $pdsh::package_ensure,
       name    =&gt; $pdsh::dshgroup_package_name,
-      require =&gt; $_package_require,
-    }
-  }
-
-  if $pdsh::ssh_package_name {
-    package { &#39;pdsh-rcmd-ssh&#39;:
-      ensure  =&gt; $pdsh::_ssh_package_ensure,
-      name    =&gt; $pdsh::ssh_package_name,
-      require =&gt; $_package_require,
-    }
-  }
-
-  if $pdsh::torque_package_name {
-    package { &#39;pdsh-mod-torque&#39;:
-      ensure  =&gt; $pdsh::_torque_package_ensure,
-      name    =&gt; $pdsh::torque_package_name,
-      require =&gt; $_package_require,
+      require =&gt; Package[&#39;pdsh&#39;],
     }
   }
 
@@ -240,13 +187,21 @@ class pdsh::install {
     package { &#39;pdsh-mod-genders&#39;:
       ensure  =&gt; $pdsh::_genders_package_ensure,
       name    =&gt; $pdsh::genders_package_name,
-      require =&gt; $_package_require,
+      require =&gt; Package[&#39;pdsh&#39;],
+    }
+  }
+
+  if $pdsh::slurm_package_name {
+    package { &#39;pdsh-mod-slurm&#39;:
+      ensure  =&gt; $pdsh::_slurm_package_ensure,
+      name    =&gt; $pdsh::slurm_package_name,
+      require =&gt; Package[&#39;pdsh&#39;],
     }
   }
 
   $pdsh::extra_packages.each |$package| {
     package { $package:
-      * =&gt; $_package_defaults
+      ensure =&gt; $pdsh::package_ensure,
     }
   }
 }</pre>

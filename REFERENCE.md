@@ -17,7 +17,7 @@
 
 ### Defined types
 
-* [`pdsh::group`](#pdshgroup): Define pdsh groups
+* [`pdsh::group`](#pdsh--group): Define pdsh groups
 
 ## Classes
 
@@ -37,86 +37,86 @@ include ::pdsh
 
 The following parameters are available in the `pdsh` class:
 
-* [`with_rsh`](#with_rsh)
-* [`with_ssh`](#with_ssh)
-* [`with_genders`](#with_genders)
-* [`with_slurm`](#with_slurm)
-* [`support_dsh`](#support_dsh)
-* [`manage_epel`](#manage_epel)
-* [`manage_genders`](#manage_genders)
-* [`package_ensure`](#package_ensure)
-* [`package_name`](#package_name)
-* [`rsh_package_name`](#rsh_package_name)
-* [`ssh_package_name`](#ssh_package_name)
-* [`dshgroup_package_name`](#dshgroup_package_name)
-* [`genders_package_name`](#genders_package_name)
-* [`slurm_package_name`](#slurm_package_name)
-* [`extra_packages`](#extra_packages)
-* [`dsh_config_dir`](#dsh_config_dir)
-* [`dsh_group_dir`](#dsh_group_dir)
-* [`dsh_group_dir_purge`](#dsh_group_dir_purge)
-* [`groups`](#groups)
-* [`use_setuid`](#use_setuid)
-* [`rcmd_type`](#rcmd_type)
-* [`ssh_args_append`](#ssh_args_append)
+* [`with_rsh`](#-pdsh--with_rsh)
+* [`with_ssh`](#-pdsh--with_ssh)
+* [`with_genders`](#-pdsh--with_genders)
+* [`with_slurm`](#-pdsh--with_slurm)
+* [`support_dsh`](#-pdsh--support_dsh)
+* [`manage_epel`](#-pdsh--manage_epel)
+* [`manage_genders`](#-pdsh--manage_genders)
+* [`package_ensure`](#-pdsh--package_ensure)
+* [`package_name`](#-pdsh--package_name)
+* [`rsh_package_name`](#-pdsh--rsh_package_name)
+* [`ssh_package_name`](#-pdsh--ssh_package_name)
+* [`dshgroup_package_name`](#-pdsh--dshgroup_package_name)
+* [`genders_package_name`](#-pdsh--genders_package_name)
+* [`slurm_package_name`](#-pdsh--slurm_package_name)
+* [`extra_packages`](#-pdsh--extra_packages)
+* [`dsh_config_dir`](#-pdsh--dsh_config_dir)
+* [`dsh_group_dir`](#-pdsh--dsh_group_dir)
+* [`dsh_group_dir_purge`](#-pdsh--dsh_group_dir_purge)
+* [`groups`](#-pdsh--groups)
+* [`use_setuid`](#-pdsh--use_setuid)
+* [`rcmd_type`](#-pdsh--rcmd_type)
+* [`ssh_args_append`](#-pdsh--ssh_args_append)
 
-##### <a name="with_rsh"></a>`with_rsh`
+##### <a name="-pdsh--with_rsh"></a>`with_rsh`
 
 Data type: `Boolean`
 
 Install rsh support
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="with_ssh"></a>`with_ssh`
+##### <a name="-pdsh--with_ssh"></a>`with_ssh`
 
 Data type: `Boolean`
 
 Install ssh support
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="with_genders"></a>`with_genders`
+##### <a name="-pdsh--with_genders"></a>`with_genders`
 
 Data type: `Boolean`
 
 Install genders support
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="with_slurm"></a>`with_slurm`
+##### <a name="-pdsh--with_slurm"></a>`with_slurm`
 
 Data type: `Boolean`
 
 Install SLURM support
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="support_dsh"></a>`support_dsh`
+##### <a name="-pdsh--support_dsh"></a>`support_dsh`
 
 Data type: `Boolean`
 
 Boolean to set if dsh support is available
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="manage_epel"></a>`manage_epel`
+##### <a name="-pdsh--manage_epel"></a>`manage_epel`
 
 Data type: `Boolean`
 
 Boolean that determines if EPEL repo should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="manage_genders"></a>`manage_genders`
+##### <a name="-pdsh--manage_genders"></a>`manage_genders`
 
 Data type: `Boolean`
 
 Boolean that determines if genders class should be managed
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="package_ensure"></a>`package_ensure`
+##### <a name="-pdsh--package_ensure"></a>`package_ensure`
 
 Data type: `String`
 
@@ -124,7 +124,7 @@ Packages ensure property
 
 Default value: `'present'`
 
-##### <a name="package_name"></a>`package_name`
+##### <a name="-pdsh--package_name"></a>`package_name`
 
 Data type: `String`
 
@@ -132,47 +132,47 @@ Main pdsh package name
 
 Default value: `'pdsh'`
 
-##### <a name="rsh_package_name"></a>`rsh_package_name`
+##### <a name="-pdsh--rsh_package_name"></a>`rsh_package_name`
 
 Data type: `Optional[String]`
 
 rsh support package name
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="ssh_package_name"></a>`ssh_package_name`
+##### <a name="-pdsh--ssh_package_name"></a>`ssh_package_name`
 
 Data type: `Optional[String]`
 
 ssh support package name
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="dshgroup_package_name"></a>`dshgroup_package_name`
+##### <a name="-pdsh--dshgroup_package_name"></a>`dshgroup_package_name`
 
 Data type: `Optional[String]`
 
 dshgroup support package name
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="genders_package_name"></a>`genders_package_name`
+##### <a name="-pdsh--genders_package_name"></a>`genders_package_name`
 
 Data type: `Optional[String]`
 
 Genders support package name
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="slurm_package_name"></a>`slurm_package_name`
+##### <a name="-pdsh--slurm_package_name"></a>`slurm_package_name`
 
 Data type: `Optional[String]`
 
 SLURM support package name
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="extra_packages"></a>`extra_packages`
+##### <a name="-pdsh--extra_packages"></a>`extra_packages`
 
 Data type: `Array`
 
@@ -180,7 +180,7 @@ Additional pdsh packages to install
 
 Default value: `[]`
 
-##### <a name="dsh_config_dir"></a>`dsh_config_dir`
+##### <a name="-pdsh--dsh_config_dir"></a>`dsh_config_dir`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -188,7 +188,7 @@ Path to dsh config directory
 
 Default value: `'/etc/dsh'`
 
-##### <a name="dsh_group_dir"></a>`dsh_group_dir`
+##### <a name="-pdsh--dsh_group_dir"></a>`dsh_group_dir`
 
 Data type: `Stdlib::Absolutepath`
 
@@ -196,15 +196,15 @@ Path to dsh group directory
 
 Default value: `'/etc/dsh/group'`
 
-##### <a name="dsh_group_dir_purge"></a>`dsh_group_dir_purge`
+##### <a name="-pdsh--dsh_group_dir_purge"></a>`dsh_group_dir_purge`
 
 Data type: `Boolean`
 
 Sets if dsh group directory should be purged
 
-Default value: ``true``
+Default value: `true`
 
-##### <a name="groups"></a>`groups`
+##### <a name="-pdsh--groups"></a>`groups`
 
 Data type: `Variant[Array, Hash]`
 
@@ -212,33 +212,33 @@ Groups that should be defined using `pdsh::group`
 
 Default value: `{}`
 
-##### <a name="use_setuid"></a>`use_setuid`
+##### <a name="-pdsh--use_setuid"></a>`use_setuid`
 
 Data type: `Boolean`
 
 Should pdsh binaries have setuid
 
-Default value: ``false``
+Default value: `false`
 
-##### <a name="rcmd_type"></a>`rcmd_type`
+##### <a name="-pdsh--rcmd_type"></a>`rcmd_type`
 
 Data type: `Optional[String]`
 
 Sets default remote command via `PDSH_RCMD_TYPE` environment variable
 
-Default value: ``undef``
+Default value: `undef`
 
-##### <a name="ssh_args_append"></a>`ssh_args_append`
+##### <a name="-pdsh--ssh_args_append"></a>`ssh_args_append`
 
 Data type: `Optional[String]`
 
 Additional SSH arguments set via `PDSH_SSH_ARGS_APPEND` environment variable
 
-Default value: ``undef``
+Default value: `undef`
 
 ## Defined types
 
-### <a name="pdshgroup"></a>`pdsh::group`
+### <a name="pdsh--group"></a>`pdsh::group`
 
 Define pdsh groups
 
@@ -257,10 +257,10 @@ pdsh::group { 'nodes':
 
 The following parameters are available in the `pdsh::group` defined type:
 
-* [`aliases`](#aliases)
-* [`members`](#members)
+* [`aliases`](#-pdsh--group--aliases)
+* [`members`](#-pdsh--group--members)
 
-##### <a name="aliases"></a>`aliases`
+##### <a name="-pdsh--group--aliases"></a>`aliases`
 
 Data type: `Variant[Array, String]`
 
@@ -268,7 +268,7 @@ Group aliases
 
 Default value: `[]`
 
-##### <a name="members"></a>`members`
+##### <a name="-pdsh--group--members"></a>`members`
 
 Data type: `Variant[Array, String]`
 

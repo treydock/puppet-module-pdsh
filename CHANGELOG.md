@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [v2.0.0](https://github.com/treydock/puppet-module-pdsh/tree/v2.0.0) (2026-10-12)
+
+[Full Changelog](https://github.com/treydock/puppet-module-pdsh/compare/v1.1.0...v2.0.0)
+
+### Changed
+
+- Major Updates [\#11](https://github.com/treydock/puppet-module-pdsh/pull/11) ([treydock](https://github.com/treydock))
+
 ## [v1.1.0](https://github.com/treydock/puppet-module-pdsh/tree/v1.1.0) (2022-04-13)
 
 [Full Changelog](https://github.com/treydock/puppet-module-pdsh/compare/v1.0.0...v1.1.0)

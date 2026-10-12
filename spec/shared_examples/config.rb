@@ -1,11 +1,13 @@
-shared_context 'pdsh::config' do |facts|
+# frozen_string_literal: true
+
+shared_examples 'pdsh::config' do |facts|
   if facts[:os]['family'] == 'RedHat'
     it do
       is_expected.to contain_file('/etc/dsh').with(ensure: 'directory',
                                                    path: '/etc/dsh',
                                                    owner: 'root',
                                                    group: 'root',
-                                                   mode: '0755')
+                                                   mode: '0755',)
     end
 
     it do
@@ -13,36 +15,36 @@ shared_context 'pdsh::config' do |facts|
                                                          path: '/etc/dsh/group',
                                                          owner: 'root',
                                                          group: 'root',
-                                                         mode: '0755')
+                                                         mode: '0755',)
     end
   end
 
   it do
-    is_expected.to contain_file('/usr/bin/pdsh').with(ensure: 'present',
+    is_expected.to contain_file('/usr/bin/pdsh').with(ensure: 'file',
                                                       owner: 'root',
                                                       group: 'root',
-                                                      mode: '0755')
+                                                      mode: '0755',)
   end
 
   it do
-    is_expected.to contain_file('/usr/bin/pdcp').with(ensure: 'present',
+    is_expected.to contain_file('/usr/bin/pdcp').with(ensure: 'file',
                                                       owner: 'root',
                                                       group: 'root',
-                                                      mode: '0755')
+                                                      mode: '0755',)
   end
 
   it do
     is_expected.to contain_file('/etc/profile.d/pdsh.sh').with(ensure: 'absent',
                                                                owner: 'root',
                                                                group: 'root',
-                                                               mode: '0644')
+                                                               mode: '0644',)
   end
 
   it do
     is_expected.to contain_file('/etc/profile.d/pdsh.csh').with(ensure: 'absent',
                                                                 owner: 'root',
                                                                 group: 'root',
-                                                                mode: '0644')
+                                                                mode: '0644',)
   end
 
   context 'when use_setuid is true' do

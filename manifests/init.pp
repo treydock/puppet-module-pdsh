@@ -71,7 +71,6 @@ class pdsh (
   Optional[String] $rcmd_type     = undef,
   Optional[String] $ssh_args_append = undef,
 ) {
-
   if $with_rsh {
     $_rsh_package_ensure   = $package_ensure
   } else {
@@ -126,5 +125,4 @@ class pdsh (
       }
     }
   }
-
 }

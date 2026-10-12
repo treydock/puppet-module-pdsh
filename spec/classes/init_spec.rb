@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe 'pdsh' do
   on_supported_os.each do |os, facts|
-    context "on #{os}" do
+    context "with #{os}" do
       let(:facts) do
         facts.merge(concat_basedir: '/dne')
       end
@@ -30,6 +32,6 @@ describe 'pdsh' do
 
         it { is_expected.to contain_yumrepo('epel').that_comes_before('Class[pdsh::install]') }
       end
-    end # end context
-  end # end on_supported_os loop
-end # end describe
+    end
+  end
+end

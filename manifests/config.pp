@@ -39,14 +39,14 @@ class pdsh::config {
   }
 
   file { '/usr/bin/pdsh':
-    ensure => 'present',
+    ensure => 'file',
     owner  => 'root',
     group  => 'root',
     mode   => $_mode,
   }
 
   file { '/usr/bin/pdcp':
-    ensure => 'present',
+    ensure => 'file',
     owner  => 'root',
     group  => 'root',
     mode   => $_mode,
@@ -73,5 +73,4 @@ class pdsh::config {
     mode    => '0644',
     content => template('pdsh/pdsh.csh.erb'),
   }
-
 }

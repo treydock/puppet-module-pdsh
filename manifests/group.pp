@@ -14,7 +14,6 @@ define pdsh::group (
   Variant[Array, String] $aliases = [],
   Variant[Array, String] $members = [],
 ) {
-
   if $aliases =~ String {
     $_aliases = [$aliases]
   } else {
@@ -59,5 +58,4 @@ define pdsh::group (
       order   => '10',
     }
   }
-
 }

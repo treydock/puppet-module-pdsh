@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'puppet_litmus/rake_tasks' if Bundler.rubygems.find_name('puppet_litmus').any?
 require 'puppetlabs_spec_helper/rake_tasks'
 require 'puppet-syntax/tasks/puppet-syntax'
+require 'voxpupuli/acceptance/rake' if Bundler.rubygems.find_name('voxpupuli-acceptance').any?
 require 'puppet_blacksmith/rake_tasks' if Bundler.rubygems.find_name('puppet-blacksmith').any?
 require 'github_changelog_generator/task' if Bundler.rubygems.find_name('github_changelog_generator').any?
 require 'puppet-strings/tasks' if Bundler.rubygems.find_name('puppet-strings').any?
@@ -95,5 +95,11 @@ namespace :release do
 end
 
 desc "Release new module version (changelog, reference, commit, tag, gh pages)"
-task :release => [:changelog, "strings:generate:reference", "release:commit", "module:tag"]
+task :release => [
+  :changelog,
+  "strings:generate:reference",
+  "strings:gh_pages:update",
+  "release:commit",
+  "module:tag",
+]
 

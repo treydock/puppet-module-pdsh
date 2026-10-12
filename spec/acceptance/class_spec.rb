@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'spec_helper_acceptance'
 
 describe 'pdsh class:' do
-  context 'default parameters' do
+  context 'with default parameters' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'pdsh': }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
@@ -32,15 +34,15 @@ describe 'pdsh class:' do
     end
   end
 
-  context 'define group', if: fact('os.family') == 'RedHat' do
+  context 'with defined group', if: fact('os.family') == 'RedHat' do
     it 'runs successfully' do
-      pp = <<-EOS
+      pp = <<-PP
       class { 'pdsh': }
       pdsh::group { 'compute':
         members => 'c[01-04]',
         aliases => 'all',
       }
-      EOS
+      PP
 
       apply_manifest(pp, catch_failures: true)
       apply_manifest(pp, catch_changes: true)
